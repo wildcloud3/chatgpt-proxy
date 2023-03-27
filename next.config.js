@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  serverTimeout: 300000,
+  proxyTimeout: 120_000,
   async rewrites() {
     const logMiddleware = (req, res, next) => {
       console.log(`[${new Date().toISOString()}] ${req.url}`)
@@ -12,7 +12,6 @@ const nextConfig = {
       {
         source: "/proxy/:slug*",
         destination: "https://api.openai.com/:slug*",
-        middleware: [logMiddleware],
       },
     ];
   },
